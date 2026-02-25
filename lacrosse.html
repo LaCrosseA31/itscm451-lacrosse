@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Change Enablement Agent</title>
+  <link rel="stylesheet" href="lacrosse-style.css" />
+</head>
+<body>
+  <header>
+    <h1>Change Enablement Agent</h1>
+    <p class="student-name">Andrew</p>
+  </header>
+
+  <main>
+    <!-- ── Change Submission Form ─────────────────────────────────── -->
+    <section class="form-section">
+      <h2>Submit a Proposed IT Change</h2>
+      <form id="change-form">
+
+        <div class="form-group">
+          <label for="change-description">Change Description</label>
+          <textarea id="change-description" name="change-description" rows="5"
+            placeholder="Describe the proposed change in detail..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="affected-system">Affected System</label>
+          <select id="affected-system" name="affected-system" required>
+            <option value="" disabled selected>Select a system...</option>
+            <option value="erp">ERP System (SAP)</option>
+            <option value="crm">CRM Platform (Salesforce)</option>
+            <option value="network">Network Infrastructure</option>
+            <option value="cloud">Cloud Services (AWS)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Is the service currently down?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="service-down" value="yes" required /> Yes
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="service-down" value="no" /> No
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Is this a pre-approved change model?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="pre-approved" value="yes" required /> Yes
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="pre-approved" value="no" /> No
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn">Classify Change</button>
+      </form>
+    </section>
+
+    <!-- ── Results Section (hidden until form submitted) ─────────── -->
+    <section class="results-section" id="results-section" hidden>
+      <h2>Change Assessment Results</h2>
+
+      <!-- Step 1: Classification -->
+      <div class="result-card" id="classification-card">
+        <h3>Change Classification</h3>
+        <p id="classification-output" class="classification-badge"></p>
+        <p id="classification-note" class="classification-note"></p>
+      </div>
+
+      <!-- Step 2: Risk Dimensions — shown only for Normal changes -->
+      <div class="result-card" id="risk-sliders-card" hidden>
+        <h3>Risk Dimension Assessment</h3>
+        <p class="risk-instruction">
+          Score each dimension 1–5. Hover a label for guidance.
+          When finished, click <strong>Assess Risk</strong>.
+        </p>
+        <div id="sliders-container"></div>
+        <button type="button" id="assess-risk-btn">Assess Risk</button>
+      </div>
+
+      <!-- Step 3: Score & Tier — shown after Assess Risk is clicked -->
+      <div class="result-card" id="risk-score-card" hidden>
+        <h3>Composite Risk Score</h3>
+        <div class="score-display">
+          <span id="composite-score">—</span>
+          <span class="score-label">/ 5.0</span>
+        </div>
+        <p id="risk-tier" class="risk-tier-badge"></p>
+      </div>
+
+      <!-- Step 4: Approval Path -->
+      <div class="result-card" id="approval-card" hidden>
+        <h3>Recommended Approval Path</h3>
+        <div id="approval-path-output" class="approval-flow"></div>
+      </div>
+
+      <!-- Step 5: Mitigation Checklist -->
+      <div class="result-card" id="checklist-card" hidden>
+        <h3>Risk Mitigation Checklist</h3>
+        <ul class="checklist" id="mitigation-checklist">
+          <li><label><input type="checkbox" />
+            <span><strong>Rollback plan:</strong> Documented, tested, estimated duration</span>
+          </label></li>
+          <li><label><input type="checkbox" />
+            <span><strong>Validation criteria:</strong> How will you confirm the change succeeded?</span>
+          </label></li>
+          <li><label><input type="checkbox" />
+            <span><strong>Monitoring:</strong> Dashboards/alerts configured for affected services</span>
+          </label></li>
+          <li><label><input type="checkbox" />
+            <span><strong>Communication plan:</strong> Stakeholders notified, maintenance window published</span>
+          </label></li>
+          <li><label><input type="checkbox" />
+            <span><strong>Fallback contacts:</strong> On-call engineers identified for escalation</span>
+          </label></li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="lacrosse-logic.js"></script>
+</body>
+</html>
